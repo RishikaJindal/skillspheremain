@@ -5,13 +5,19 @@ import React, { useState } from "react";
 import styles from "./Login.module.scss"; // Assuming you have a CSS module for styling
 import { error } from "console";
 import axios from "axios";
+import newRequest from "@/app/utils/newRequest";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "../../actions/authActions";
 
 interface LoginProps {}
 
 const LoginMain: React.FC<LoginProps> = () => {
+    const dispatch = useDispatch();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const router = useRouter;
 
     // const router = useRouter();
     // const [username, setUsername] = useState<string>("");
@@ -38,16 +44,20 @@ const LoginMain: React.FC<LoginProps> = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        dispatch(login());
+        console.log(username, password);
         try {
-            const res = await axios.post<{ data: string }>(
-                "http://localhost:8000/auth/login",
-                {
-                    username,
-                    password,
-                }
-            );
+            const res = await newRequest.post("/auth/login", {
+                username,
+                password,
+            });
+            // localStorage.setItem("currentUser", JSON.stringify(res.data));
             console.log(res.data);
+            window.location.href = "/";
+
+            //  router.push("/add");
         } catch (err) {
+            //setError("err")
             console.log(err);
         }
     };
@@ -61,7 +71,7 @@ const LoginMain: React.FC<LoginProps> = () => {
                     id="username"
                     name="username"
                     type="text"
-                    defaultValue={""}
+                    //defaultValue={""}
                     placeholder="johndoe"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -72,7 +82,7 @@ const LoginMain: React.FC<LoginProps> = () => {
                     id="password"
                     name="password"
                     type="password"
-                    defaultValue={" "}
+                    // defaultValue={" "}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

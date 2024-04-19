@@ -1,49 +1,36 @@
-"use client";
-// import React from "react";
-// import Link from "next/link";
-
-// const Home: React.FC = () => {
-//     return (
-//         <div className="max-w-screen-xl mx-auto px-4">
-//             <header className="text-center py-10">
-//                 <h1 className="text-4xl font-bold">Skill Sphere</h1>
-//                 <p className="text-xl text-gray-600">Find freelance services</p>
-//             </header>
-
-//             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-//                 {/* Gig cards */}
-//             </div>
-
-//             <footer className="text-center py-6">
-//                 <Link href="/gigs/create">
-//                     <Link href="#" className="button">
-//                         Create a Gig
-//                     </Link>
-//                 </Link>
-//             </footer>
-//         </div>
-//     );
-// };
-
-// export default Home;
-
-import Image from "next/image";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/layout/Hero";
+import Heroes from "@/components/layout/Hero";
 import Link from "next/link";
+import React from "react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store";
 
-//import { useRouter } from "next/router";
-
-export default function Home() {
-    //const router = useRouter();
+const Home: React.FC = () => {
     return (
-        <div>
-            <h1>hello from root page</h1>
-            <Link href="./about">About</Link>
-            <br />
-            <Link href="./login1">Login</Link>
-            <br />
-            <Link href="./signup1">Signup</Link>
-            <br />
-            {/* <Navbar router={router} /> */}
-        </div>
+        <>
+            <Header />
+            <Hero />
+        </>
     );
+};
+
+{
+    /* Hello word */
 }
+{
+    /* <div className="container mx-auto px-4">
+             
+                <p>This is a content to make our page longer</p>
+                <div className="w-full h-screen bg-blue-300">
+                    <h1>Welcome to SkillSphere</h1>
+                    {/* <CatCard /> */
+}
+{
+    /* </div>
+                <p>Lorem Ipsum is simply dummy text ...</p>
+            </div> */
+}
+
+export default Home;
